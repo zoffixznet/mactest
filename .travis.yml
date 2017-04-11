@@ -6,7 +6,7 @@ os:
 
 env:
     - BACKEND=moar
-    - BACKEND=jvm
+#    - BACKEND=jvm
 
 before_install:
     - 'if [[ $BACKEND == "moar" ]]; then export VM_OPTS="--gen-moar"; fi'
