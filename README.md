@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/zoffixznet/mactest.svg)](https://travis-ci.org/zoffixznet/mactest)
 
 #### LICENSE
 
