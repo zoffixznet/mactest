@@ -1,7 +1,28 @@
-language: perl6
-perl6:
-    - latest
+language: perl
+
+os:
+    - linux
+    - osx
+
+env:
+    - BACKEND=moar
+    - BACKEND=jvm
+
+before_install:
+    - 'if [[ $BACKEND == "moar" ]]; then export VM_OPTS="--gen-moar"; fi'
+    - git clone https://github.com/rakudo/rakudo.git $HOME/rakudo
+    - cd $HOME/rakudo
+    - perl Configure.pl $VM_OPTS --gen-nqp --backends=$BACKEND
+    - make install
+    - export PATH=$HOME/rakudo/install/bin:$PATH
+    - export ZEF_PLUGIN_DEBUG=1
+    - export ZEF_BUILDPM_DEBUG=1
+    - export PATH=$HOME/rakudo/install/share/perl6/site/bin:$PATH
+    - cd $TRAVIS_BUILD_DIR
 
 install:
-    - rakudobrew build-zef
+    # need at least 1 statement in 'install'
+    - perl6 -v
+
+script:
     - perl6 testing.p6
